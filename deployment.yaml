@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: helloworld
+  name: helloworld
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: helloworld
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: helloworld
+    spec:
+      containers:
+      - image: msottana/helloworld:1.0
+        name: helloworld
+        resources:
+          limits:
+            cpu: 100mi
+            memory: 100 Mi
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+        readynessProbe:
+          httpGet:
+            path: /
+            port: 8080
+status: {}
